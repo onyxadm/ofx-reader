@@ -42,7 +42,7 @@ object Form1: TForm1
     Top = 51
     Width = 619
     Height = 240
-    Anchors = [akLeft, akRight, akBottom]
+    Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DataSource1
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
