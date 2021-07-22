@@ -1,12 +1,16 @@
 # OFX/OFC Reader
-[![github closed issues](https://img.shields.io/github/issues-closed-raw/leogregianin/ofx-reader.svg?style=flat-square)](https://github.com/leogregianin/ofx-reader/issues?q=is%3Aissue+is%3Aclosed)
-
+ 
 Read the OFX (Open Financial Exchange) and OFC (Open Financial Connectivity) file formats.
 
+# Reference
+ 
+This component is an improvement of the original code: [ofx-reader](https://github.com/leogregianin/ofx-reader)
 
 ## Sponsor
 
-<a href="https://www.buymeacoffee.com/leogregianin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 35px !important;width: 150px !important;" ></a>
+Did this component facilitate your bank reconciliation or did it help you to understand a little more about it? Make a donation.
+
+![donation](pix_donate.png)
 
 
 About
@@ -24,7 +28,7 @@ Instalation (optional)
 -------
 For install in your project using [boss](https://github.com/HashLoad/boss):
 ``` sh
-$ boss install github.com/leogregianin/ofx-reader
+$ boss install github.com/onyxadm/ofx-reader
 ``` 
  
 Example
@@ -54,7 +58,7 @@ Unittest
 Colaboration
 -------
 
-Contribute to improve the project. If you'd like inspiration on projects to take on, check out the [Easy-Fix](https://github.com/leogregianin/ofx-reader/issues) label on the tracker. It holds tasks that can be solved without too much prior knowledge of the code.
+Contribute to improve the project original. If you'd like inspiration on projects to take on, check out the [Easy-Fix](https://github.com/leogregianin/ofx-reader/issues) label on the tracker. It holds tasks that can be solved without too much prior knowledge of the code.
 
 
 Contributors
