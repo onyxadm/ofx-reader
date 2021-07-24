@@ -39,6 +39,7 @@ type
     FAccountType : string;
     FDateStart   : TDateTime;
     FFinalBalance: Currency;
+    FDateBalance : TDateTime;
 
     procedure Clear;
     procedure Delete(iIndex: Integer);
@@ -63,6 +64,7 @@ type
     property AccountType : string read FAccountType write FAccountType;
     property DateStart   : TDateTime read FDateStart write FDateStart;
     property DateEnd     : TDateTime read FDateEnd write FDateEnd;
+    property DateBalance : TDateTime read FDateBalance write FDateBalance;
     property FinalBalance: Currency read FFinalBalance write FFinalBalance;
   end;
 
@@ -115,6 +117,25 @@ begin
     NumString := StringReplace(NumString, DS, '', []);
 
   Result := StrToFloat(NumString);
+end;
+
+{ -----------------------------------------------------------------------------
+  Converte uma <NumString> para Double, semelhante ao StrToFloatDef, mas
+  verifica se a virgula é '.' ou ',' efetuando a conversão se necessário
+  Se não for possivel converter, retorna <DefaultValue>
+  ---------------------------------------------------------------------------- }
+function StringToFloatDef(const NumString: String; const DefaultValue: Double): Double;
+begin
+  if Trim(NumString).isEmpty then
+    Result := DefaultValue
+  else
+  begin
+    try
+      Result := StringToFloat(NumString);
+    except
+      Result := DefaultValue;
+    end;
+  end;
 end;
 
 { -----------------------------------------------------------------------------
@@ -248,7 +269,17 @@ begin
 
         // Final
         if FindString('<LEDGER>', sLine) or FindString('<BALAMT>', sLine) then
-          FinalBalance := StrToFloatDef(InfLine(sLine), 0);
+          FinalBalance := StringToFloatDef(InfLine(sLine), 0);
+
+        // Date Balance
+        if FindString('<DTASOF>', sLine) then
+        begin
+          if Trim(sLine) <> '' then
+            DateBalance := EncodeDate( //
+              StrToIntDef(copy(InfLine(sLine), 1, 4), 0), //
+              StrToIntDef(copy(InfLine(sLine), 5, 2), 0), //
+              StrToIntDef(copy(InfLine(sLine), 7, 2), 0));
+        end;
 
         // Movement
         if FindString('<STMTTRN>', sLine) then
@@ -279,19 +310,20 @@ begin
             if FindString('<FITID>', sLine) then
               oItem.ID := Trim(InfLine(sLine));
 
-            if FindString('<CHKNUM>', sLine) or FindString('<CHECKNUM>', sLine) then
-            begin
+            if FindString('<CHKNUM>', sLine) or FindString('<CHECKNUM>', sLine) or FindString('<REFNUM>', sLine)
+            then
               oItem.Document := InfLine(sLine);
 
-              if Trim(oItem.Document).isEmpty then
-                oItem.Document := oItem.ID;
-            end;
+            if Trim(oItem.Document).isEmpty then
+              oItem.Document := oItem.ID;
+
+            oItem.Document := RemoverEspacosDuplos(oItem.Document);
 
             if FindString('<MEMO>', sLine) then
               oItem.Description := RemoverEspacosDuplos(InfLine(sLine));
 
             if FindString('<TRNAMT>', sLine) then
-              oItem.Value := StringToFloat(InfLine(sLine));
+              oItem.Value := StringToFloatDef(InfLine(sLine), 0);
           end;
         end;
 

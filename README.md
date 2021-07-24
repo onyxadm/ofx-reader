@@ -15,6 +15,12 @@ Did this component facilitate your bank reconciliation or did it help you to und
 
 About
 -------
+   * Fixed the document number.
+   
+   * Included return of current balance date.
+   
+   * Removed double spaces.
+   ------------------------------------------------
 
    * Import the OFX/OFC file allows to save time in financial management. Instead of typing or throw each drive manually, you download the current account statement or savings in this file format.
 
