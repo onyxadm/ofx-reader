@@ -2,10 +2,6 @@
  
 Read the OFX (Open Financial Exchange) and OFC (Open Financial Connectivity) file formats.
 
-# Reference
- 
-This component is an improvement of the original code: [ofx-reader](https://github.com/leogregianin/ofx-reader)
-
 ## Sponsor
 
 Did this component facilitate your bank reconciliation or did it help you to understand a little more about it? Make a donation.
